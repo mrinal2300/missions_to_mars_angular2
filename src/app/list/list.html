@@ -1,0 +1,19 @@
+<!-- dispaly button to add new mission -->
+<div class="row padding">
+	<input type="button" class="btn btn-primary" (click)="addNew()" name="add" value="Add New">
+</div>
+<!-- dispay list of missions -->
+<div class="row padding">
+	<table class="table table-striped table-hover" *ngIf="sharedData.missions.length > 0">
+		<tr>
+			<th>Mission Name</th>
+			<th>Year</th> 
+			<th>Notes</th>
+		</tr>
+		<tr  *ngFor="let mission of sharedData.missions; let i =index" (click)="showMission(i)" [class.selected]="sharedData.activeIndex===i">
+			<td>{{mission.name}}</td>
+			<td>{{mission.date}}</td>
+			<td>{{mission.notes}}</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,45 @@
+body {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+h1 {
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+}
+
+header {
+    background-color: #337ab7;
+    color: #fff;
+    text-align: center;
+    padding: 0.5%;
+    font-size: 20px;
+}
+
+.padding {
+    padding: 20px;
+}
+
+.selected{
+	 background-color: #337ab7 !important;
+	 color: #eeeeee;
+}
+
+.table-hover tr:hover td {
+    background-color: #84aacc;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.partition{
+	border-right: solid 2px #ccc;
+}
+
+input.ng-valid {
+    border-left: 5px solid green;
+}
+
+input.ng-invalid {
+    border-left: 5px solid red;
+}

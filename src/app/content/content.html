@@ -1,0 +1,113 @@
+<!-- dispaly mission content --> 
+<div class="row padding" [hidden]= "sharedData.addData || sharedData.editData">
+	<div class="row padding">
+		<button class="btn btn-primary" (click)="deleteData(sharedData.activeIndex)">Delete</button>
+		<button class="btn btn-primary" (click)="loadEditForm()" *ngIf="sharedData.missions.length > 0">Edit</button>
+	</div>
+	<table class="padding" *ngIf="sharedData.missions.length > 0">
+		<tr>
+			<td><h2>{{sharedData.missions[sharedData.activeIndex].name}}</h2></td>
+		</tr>
+		<tr>
+			<td>Launch Date: {{sharedData.missions[sharedData.activeIndex].date}}</td>
+		</tr>
+		<tr>
+			<td>Short note: {{sharedData.missions[sharedData.activeIndex].notes}}</td>
+		</tr>
+		<tr>
+			<td>Status: {{sharedData.missions[sharedData.activeIndex].status}}</td>
+		</tr>
+		<br>
+		<tr>
+			<td>{{sharedData.missions[sharedData.activeIndex].description}}</td>
+		</tr>
+	</table>
+</div>
+	
+<!-- form will add new mission data -->
+<div [hidden]= "!sharedData.addData">
+	<h3>ADD NEW ENTRY</h3>
+	<form #newData="ngForm" >
+		<div class="form-group">
+			<label>Name</label>
+			<input type="text" #nameRef="ngModel" class="form-control" name="name" required ngModel>
+			<div [hidden]="nameRef.valid || nameRef.pristine" class="alert alert-danger">
+				Please enter a name
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Year</label>
+			<input type="text" #yearRef="ngModel" class="form-control" name="date" required ngModel>
+			<div [hidden]="yearRef.valid || yearRef.pristine" class="alert alert-danger">
+				Please enter a Year
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Short note</label>
+			<input type="text" #notesRef="ngModel" class="form-control" name="notes" required ngModel>
+			<div [hidden]="notesRef.valid || notesRef.pristine" class="alert alert-danger">
+				Please enter notes
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Status</label>
+			<input type="text" #statusRef="ngModel" class="form-control" name="status" required ngModel>
+			<div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+				Please enter a status
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Description</label>
+			<textarea class="form-control" #descriptionRef="ngModel" name="description" required ngModel></textarea>
+			<div [hidden]="descriptionRef.valid || descriptionRef.pristine" class="alert alert-danger">
+				Please enter a description
+			</div>
+		</div>
+		<button [disabled]="!newData.form.valid" class="btn btn-primary" (click)="addNewEntry(newData.value)">Add</button>
+		<button class="btn btn-primary" (click)="cancelFrom()">Cancel</button>
+	</form>
+</div>
+
+<!-- form will edit mission data -->
+<div [hidden]= "!sharedData.editData" *ngIf="sharedData.missions.length > 0">
+	<h3>EDIT ENTRY</h3>
+	<form #editData="ngForm" >
+	<div class="form-group">
+		<label>Name</label>
+		<input type="text" class="form-control" name="name" #nameRef="ngModel" required [ngModel]="sharedData.missions[sharedData.activeIndex].name">
+		<div [hidden]="nameRef.valid || nameRef.pristine" class="alert alert-danger">
+			Please enter a name
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Year</label>
+		<input type="text" class="form-control" name="date" #yearRef="ngModel" required [ngModel]="sharedData.missions[sharedData.activeIndex].date">
+		<div [hidden]="yearRef.valid || yearRef.pristine" class="alert alert-danger">
+			Please enter a year
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Short note</label>
+		<input type="text" class="form-control" name="notes" #notesRef="ngModel" required [ngModel]="sharedData.missions[sharedData.activeIndex].notes">
+		<div [hidden]="notesRef.valid || notesRef.pristine" class="alert alert-danger">
+			Please enter notes
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Status</label> 
+		<input type="text" class="form-control" name="status" #statusRef="ngModel" required [ngModel]="sharedData.missions[sharedData.activeIndex].status">
+		<div [hidden]="statusRef.valid || statusRef.pristine" class="alert alert-danger">
+			Please enter a status
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Description</label>
+		<textarea class="form-control" name="description" #descriptionRef="ngModel" required [ngModel]="sharedData.missions[sharedData.activeIndex].description"></textarea>
+		<div [hidden]="descriptionRef.valid || descriptionRef.pristine" class="alert alert-danger">
+			Please enter a description
+		</div>
+	</div>
+	<button [disabled]="!editData.form.valid" class="btn btn-primary" (click)="edit_Data(editData.value)">Save changes</button>
+	<button class="btn btn-primary" (click)="cancelFrom()">Cancel</button>
+	</form>
+</div>
